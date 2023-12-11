@@ -11,11 +11,11 @@ class Interface:
         self.board = data.billboard()
         self.graph = graph.Graph()
         
-    def get_content(self, cache=True, save=False):
+    def get_content(self, cache=True, save=False, resume=False, header=None):
         self.board.get_billboard(cache=cache, save=save)
         self.graph.get_artists(self.board, cache=cache, save=save)
-        self.graph.get_articles(cache=cache, save=save)
-        self.graph.get_influence_graph(cache=cache)
+        self.graph.get_articles(cache=cache, save=save, headers=header)
+        self.graph.get_influence_graph(cache=cache, save=save, resume=resume)
 
     def simplify_name(self,str):
         first_last = str.split(' ')

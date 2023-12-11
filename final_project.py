@@ -3,13 +3,29 @@ import interface
 def main():
     print('Billboard Influence Network!')
     print('CAUTION: api querys may take more than 6 hours if cache is not used')
-    cache = input('Do you want to use cache? (y/n) :')
-    save = input('Do you want to save cache? (y/n) :')
+    cache = input('Do you want to use cache? (y/n): ')
+    save = input('Do you want to save cache? (y/n): ')
+    resume = input('Do you want to continue from last record? (y/n): ')
     cache = False if cache == 'n' else True
     save = False if save == 'n' else True
+    resume = False if resume == 'n' else True
+    headers = None
+    if not cache:
+        header_input = input('Please input the private key for wikipedia api if exists (y/n): ')
+        if header_input == 'y':
+            key = input('Please input the private key: ')
+            user_agent = input('Please input the user agent: ')
+            headers = {
+                        'Authorization':f'Bearer {key}',
+                        'User-Agent': user_agent
+                    }
     itfc = interface.Interface()
     print('Loading...')
-    itfc.get_content(cache=cache, save=save)
+    try:
+        itfc.get_content(cache=cache, save=save, resume=resume, header=headers)
+    except:
+        print('Error! Please check your internet connection and try again!')
+        return False
     print('Done!')
     while True:
         print('Options:')

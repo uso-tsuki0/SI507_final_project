@@ -53,6 +53,7 @@ class Graph:
     def read_influence_graph(self, file_name='influence.json'):
         with open(file_name, 'r') as f:
             self.influence_graph = json.load(f)
+        return self.influence_graph
 
     def get_artists(self, board, cache=True, save=False):
         if cache:
@@ -86,7 +87,7 @@ class Graph:
             if save:
                 self.save_artists()
     
-    def get_articles(self, cache=True, save=False):
+    def get_articles(self, cache=True, save=False, headers=None):
         if cache:
             self.read_articles()
         else:
@@ -103,10 +104,11 @@ class Graph:
                             'srsearch': search_query,
                             'srlimit': 10,
                         }
-                        headers = {
-                            'Authorization':'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzOTc2Yzc2ZGI0ODMwODMwMzA0NDM4ZWU5ZWZmMWUyZCIsImp0aSI6IjcwN2ZmNDZjYjAyZWJlN2E0NjE2ODAzMTMyNDhjZjdmZjA0YWNmNzAyMDc4MWQxMmQ5ZGM2ZWNiOTc0MzZlNDM0ZjMzYWE1Yzc1Y2FkZDZmIiwiaWF0IjoxNzAxNjk1NDgxLjAyNzU2OSwibmJmIjoxNzAxNjk1NDgxLjAyNzU3MiwiZXhwIjozMzI1ODYwNDI4MS4wMjUzOSwic3ViIjoiNzQ0MzQ5MzYiLCJpc3MiOiJodHRwczovL21ldGEud2lraW1lZGlhLm9yZyIsInJhdGVsaW1pdCI6eyJyZXF1ZXN0c19wZXJfdW5pdCI6NTAwMCwidW5pdCI6IkhPVVIifSwic2NvcGVzIjpbImJhc2ljIl19.KfA44HXKVDH5SVN_Lh_4yPYaFmW71qkvTQspIH7t191V3-LXCxOt_f4HlQY_KjT-ENAGzn6G3XbQIa0xGStVKocYjOaap3j6_sw0D29mCS25Mt12Q1yo1uMFtESLGpIBy1aZIbnmnjghAqGFs3UdnB9OewYTe9bovzdLxo7rHiovmxSxbPt5AVuQMiEJUPY5ifIJD4wmfj0vtpb2UB1wEg74DVGiUPYHuR6W2hE-nsjFxsZcgopUWf3T992rHN8gOmDOA12x6IFRERTsz7VWstQJ8AsfVYcc6glBiX2AC4ux7v96bE8Phk_AXMna1UjVw992wT2fSOglezcU01_VofEEV913EXuoN77LDEdbx5v-RjvuneOd-5CUTdYsh3ulrYyqqcoE9zF1Uf1m1BGVeOb04ARIK0iuHvDn-Iz2mb5MfHklxRhFxBXl3B0IyQDNFYjI6AyJ5LWs4OHiN9bwLGEMK9UrB78JUDvidzRdO230UpdYVNWxOfmASaLbIiuRcEBR33ytwCPQSRK2ztrhRA6KdNn_RJcZ2JaG9yoxodkHuNJjXVlUZuoUeBSQi-CXIjPKo1GHD9P8wgD1kzF3pAlHQR49uiaoDQ8aqiZ2C8YJr3yJmgZjWttvRWyZy9AIizELChketvtVZAkLDK9d3Yh_QIQZp9vOXIAghgyjcfQ',
-                            'User-Agent':'SI507_final_project'
-                        }
+                        if not headers:
+                            headers = {
+                                'Authorization':'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzOTc2Yzc2ZGI0ODMwODMwMzA0NDM4ZWU5ZWZmMWUyZCIsImp0aSI6IjcwN2ZmNDZjYjAyZWJlN2E0NjE2ODAzMTMyNDhjZjdmZjA0YWNmNzAyMDc4MWQxMmQ5ZGM2ZWNiOTc0MzZlNDM0ZjMzYWE1Yzc1Y2FkZDZmIiwiaWF0IjoxNzAxNjk1NDgxLjAyNzU2OSwibmJmIjoxNzAxNjk1NDgxLjAyNzU3MiwiZXhwIjozMzI1ODYwNDI4MS4wMjUzOSwic3ViIjoiNzQ0MzQ5MzYiLCJpc3MiOiJodHRwczovL21ldGEud2lraW1lZGlhLm9yZyIsInJhdGVsaW1pdCI6eyJyZXF1ZXN0c19wZXJfdW5pdCI6NTAwMCwidW5pdCI6IkhPVVIifSwic2NvcGVzIjpbImJhc2ljIl19.KfA44HXKVDH5SVN_Lh_4yPYaFmW71qkvTQspIH7t191V3-LXCxOt_f4HlQY_KjT-ENAGzn6G3XbQIa0xGStVKocYjOaap3j6_sw0D29mCS25Mt12Q1yo1uMFtESLGpIBy1aZIbnmnjghAqGFs3UdnB9OewYTe9bovzdLxo7rHiovmxSxbPt5AVuQMiEJUPY5ifIJD4wmfj0vtpb2UB1wEg74DVGiUPYHuR6W2hE-nsjFxsZcgopUWf3T992rHN8gOmDOA12x6IFRERTsz7VWstQJ8AsfVYcc6glBiX2AC4ux7v96bE8Phk_AXMna1UjVw992wT2fSOglezcU01_VofEEV913EXuoN77LDEdbx5v-RjvuneOd-5CUTdYsh3ulrYyqqcoE9zF1Uf1m1BGVeOb04ARIK0iuHvDn-Iz2mb5MfHklxRhFxBXl3B0IyQDNFYjI6AyJ5LWs4OHiN9bwLGEMK9UrB78JUDvidzRdO230UpdYVNWxOfmASaLbIiuRcEBR33ytwCPQSRK2ztrhRA6KdNn_RJcZ2JaG9yoxodkHuNJjXVlUZuoUeBSQi-CXIjPKo1GHD9P8wgD1kzF3pAlHQR49uiaoDQ8aqiZ2C8YJr3yJmgZjWttvRWyZy9AIizELChketvtVZAkLDK9d3Yh_QIQZp9vOXIAghgyjcfQ',
+                                'User-Agent':'SI507_final_project'
+                            }
                         response = req.get(api_url, params=params, headers=headers)
                         data = response.json()
                         search_results = data['query']['search']
@@ -152,13 +154,19 @@ class Graph:
         else:
             return (10000/songs_influence_sum)
         
-    def get_influence_graph(self, cache=True):
+    def get_influence_graph(self, cache=True, save=False, resume=False):
         if cache:
             self.read_influence_graph()
         else:
-            influence = {}
-            for artist in self.artists.keys():
-                influence[artist] = {}
+            if resume:
+                influence = self.read_influence_graph()
+                for artist in self.artists.keys():
+                    if artist not in influence.keys():
+                        influence[artist] = {}
+            else:
+                influence = {}
+                for artist in self.artists.keys():
+                    influence[artist] = {}
             i = 0
             for artist1 in self.artists.keys():
                 for artist2 in self.artists.keys():
@@ -167,19 +175,19 @@ class Graph:
                             influence[artist1][artist2] = self.get_influence(self.artists[artist1], self.artists[artist2])
                         except:
                             print(f'network error occurred when searching {artist1}, {artist2}')
-                            with open('influence.json', 'w') as f:
-                                json.dump(influence, f)
+                            if save:
+                                self.save_influence_graph()
                             return influence
                         i += 1
                         if i >= 100:
-                            with open('influence.json', 'w') as f:
-                                json.dump(influence, f)
+                            if save:
+                                self.save_influence_graph()
                             print('cache automatically saved')
                             i = 0
                         print(artist1, artist2, influence[artist1][artist2])
             self.influence_graph = influence
-            with open('influence.json', 'w') as f:
-                json.dump(influence, f)
+            self.save_influence_graph()
+        return True
 
     def dijkstra(self, start, end):
         distances = {node: float('inf') for node in self.influence_graph}
