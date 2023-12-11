@@ -6,7 +6,6 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import time
 import numpy as np
-import heapq
 
 class Song:
     def __init__(self, title="No Title", author="No Author", release_date="0000000000", json=None):

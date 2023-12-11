@@ -1,7 +1,3 @@
-Certainly! Below is a basic README template for your Python script:
-
----
-
 # Billboard Influence Network
 
 ## Overview
@@ -23,12 +19,15 @@ The **Billboard Influence Network** is a Python script that interacts with an in
 1. Run the script using the following command:
 
     ```bash
-    python script_name.py
+    python final_project.py
     ```
 
 2. You will be prompted to choose whether to use cache and save cache. Be cautious, as API queries without cache may take a significant amount of time.
 
-3. The script will load the required content. Once loaded, you will be presented with a menu of options:
+3. Wikipedia private key should be provided because the query amount exceed the none-authentication limit.
+    Wikipedia api can be applied here: https://api.wikimedia.org/wiki/Special:AppManagement
+
+4. The script will load the required content. Once loaded, you will be presented with a menu of options:
 
     - **1. Get billboard chart**
     - **2. Get artist information**
@@ -39,21 +38,14 @@ The **Billboard Influence Network** is a Python script that interacts with an in
     - **7. Get rank by influence activity**
     - **8. Exit**
 
-4. Choose an option by entering the corresponding number (1-8).
+5. Choose an option by entering the corresponding number (1-8).
 
-5. Follow the prompts to perform the selected operation.
+6. Follow the prompts to perform the selected operation.
 
-6. After each operation, you will be asked if you want to continue. Enter 'y' to continue or 'n' to exit.
+7. After each operation, you will be asked if you want to continue. Enter 'y' to continue or 'n' to exit.
 
 ## Requirements
 
 - Python 3.x
-- [Interface module](link_to_interface_module)
+- requests, json, re, ast, pandas, bs4, time, numpy, networkx, matplotlib, pandas, seaborn
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-Replace "script_name.py" and "link_to_interface_module" with the actual name of your Python script and the link to the Interface module, respectively. Additionally, make sure to include any relevant information about dependencies or installation steps in the "Requirements" section.
