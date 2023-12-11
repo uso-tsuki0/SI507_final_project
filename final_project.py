@@ -51,6 +51,7 @@ def main():
             end = input('Please enter end artist name: ')
             itfc.query_shortest_path(start, end)
         elif option == '4':
+            print('To save memory, only plot edges with weight > 4')
             itfc.query_graph()
         elif option == '5':
             itfc.query_rank_score()
