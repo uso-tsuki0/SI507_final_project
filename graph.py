@@ -182,11 +182,12 @@ class Graph:
                         if i >= 100:
                             if save:
                                 self.save_influence_graph()
-                            print('cache automatically saved')
+                                print('cache automatically saved')
                             i = 0
                         print(artist1, artist2, influence[artist1][artist2])
             self.influence_graph = influence
-            self.save_influence_graph()
+            if save:
+                self.save_influence_graph()
         return True
 
     def dijkstra(self, start, end):
